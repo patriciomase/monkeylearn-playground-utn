@@ -1,20 +1,67 @@
 .App {
-  font-family: sans-serif;
+  font-family: monospace;
   text-align: center;
+  text-rendering: geometricPrecision;
 }
 
 textarea {
+  border: 3px solid black;
+  border-radius: 3px;
   font-size: 1.5rem;
-  min-height: 400px;
+  margin: 2rem;
+  min-height: 200px;
   width: 100%;
 }
 
 button {
-  background: tomato;
-  border: none;
-  color: white;
+  border: 3px solid black;
+  border-radius: 3px;
+  color: black;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 15px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: lightgray;
+}
+
+button span {
   font-size: 1.5rem;
-  padding: 20px;
+}
+
+.classified {
+  background: lightgray;
+  color: black;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.classified::before,
+.classified::after {
+  content: '"';
+}
+
+.tags {
+  list-style: none;
+  margin: 1rem;
+  min-height: 100px;
+  padding: 0;
+}
+
+.tag {
+  background: lightblue;
+  color: black;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 10px;
+  padding: 1rem;
 }
 
 .lds-dual-ring {

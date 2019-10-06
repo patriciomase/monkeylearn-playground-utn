@@ -4,6 +4,12 @@ import axios from "axios";
 
 import "./styles.css";
 
+const initialState = {
+  status: "ready",
+  text: "",
+  tags: []
+};
+
 const apiUrl =
   "https://api.monkeylearn.com/v3/classifiers/cl_o46qggZq/classify/";
 
@@ -14,9 +20,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      status: "ready",
-      text: "",
-      tags: []
+      ...initialState
     };
   }
 
@@ -48,26 +52,37 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>MonkeyLearn Playground</h1>
-        <h2>Enter the text you want to classify</h2>
+        <h1>MonkeyLearn Playground -- Topic classifier</h1>
         {this.state.status === "ready" && (
           <>
+            <h2>Enter the text you want to classify</h2>
             <textarea
               value={this.state.text}
               onChange={e => {
                 this.setState({ text: e.target.value });
               }}
             />
-            <button onClick={e => this.queryApi()}>Classify!</button>
+            <button onClick={e => this.queryApi()}>Classify ➡</button>
           </>
         )}
         {this.state.status === "loading" && <Loading />}
         {this.state.status === "fetched" && (
-          <div>
-            {this.state.tags.map(t => (
-              <div className="tag">{t.name}</div>
-            ))}
-          </div>
+          <>
+            <div className="classified">{this.state.text}</div>
+            <div>
+              <h2>Topics in the text:</h2>
+            </div>
+            <ul className="tags">
+              {this.state.tags.map(t => (
+                <li key={t.name} className="tag">
+                  {t.name} ({t.conf})
+                </li>
+              ))}
+            </ul>
+            <button onClick={() => (this.setState = { ...initialState })}>
+              Try again <span>♲</span>
+            </button>
+          </>
         )}
       </div>
     );
