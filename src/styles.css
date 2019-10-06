@@ -7,9 +7,12 @@
 textarea {
   border: 3px solid black;
   border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
   font-size: 1rem;
   line-height: 1.8;
-  margin: 2rem;
+  margin: 2rem auto;
+  max-width: 980px;
   min-height: 200px;
   padding: 1rem;
   width: 100%;
