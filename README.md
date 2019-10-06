@@ -4,6 +4,6 @@
 
 ### How to use it
 
-1. Add the missing api key number thru the URL using the `api-key` query param. (Example: pageurl?`api-key=9`)
+1. Add the missing api key number thru the URL using the `token` query param. (Example: pageurl?`token=0000`)
 2. Copy and paste some text into the box
 3. Click "Classify" button

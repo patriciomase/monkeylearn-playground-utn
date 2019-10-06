@@ -13,6 +13,15 @@ const initialState = {
 const apiUrl =
   "https://api.monkeylearn.com/v3/classifiers/cl_o46qggZq/classify/";
 
+const getAuthToken = () => {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
+
+  if (!token) return null;
+
+  return "Token 271242547b42bafb88a450186ce44e45a197" + token;
+};
+
 const Loading = () => <div className="lds-dual-ring" />;
 
 class App extends React.Component {
@@ -26,6 +35,16 @@ class App extends React.Component {
 
   queryApi = () => {
     this.setState({ status: "loading" });
+    const authToken = getAuthToken();
+
+    if (!authToken) {
+      this.setState({
+        status: "error",
+        error: "No `token` query param provided"
+      });
+      return null;
+    }
+
     axios
       .post(
         apiUrl,
@@ -34,7 +53,7 @@ class App extends React.Component {
         },
         {
           headers: {
-            Authorization: "Token 271242547b42bafb88a450186ce44e45a1970479"
+            Authorization: authToken
           }
         }
       )
@@ -79,10 +98,13 @@ class App extends React.Component {
                 </li>
               ))}
             </ul>
-            <button onClick={() => (this.setState = { ...initialState })}>
+            <button onClick={() => this.setState({ ...initialState })}>
               Try again <span>♲</span>
             </button>
           </>
+        )}
+        {this.state.status === "error" && (
+          <div className="error">{this.state.error}</div>
         )}
       </div>
     );
